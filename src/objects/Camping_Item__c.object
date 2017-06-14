@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Packed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Packed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Price__c</fullName>
+        <externalId>false</externalId>
+        <label>Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Camping Item</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Camping Item  Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Camping Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>CloneNew</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>CloneNew</masterLabel>
+        <openType>newWindow</openType>
+        <page>CustomClone</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>NB</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>NB</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/apex.js&quot;)}
+
+var el = document.createElement(&quot;div&quot;);
+var el1 = document.createElement(&quot;div&quot;);
+var baseUrl = window.location.protocol+&apos;//&apos;+window.location.host+&apos;/&apos;;
+var element = &quot;&lt;div style=&apos;float:right;padding-bottom:10px&apos;&gt;&lt;a href = &quot;+baseUrl+&quot;{!Account.Id} style=&apos;color:darkolivegreen;&apos; id=&apos;test&apos;&gt;Close&lt;/a&gt;&lt;/div&gt;&quot;;
+
+el.setAttribute(&quot;style&quot;,&quot;position:fixed; top:0; left:0; background:rgba(0,0,0,0.6); z-index:5; width:100%; height:100%; display:block;&quot;);
+
+el1.setAttribute(&quot;style&quot;,&quot;height:50%; width:50%; margin:0 auto; position:relative; z-index:10; display:block; background-color:white; border:5px solid #cccccc; border-radius:10px;top:-6200px;padding-top: 20px;padding-bottom: 20px;padding-left: 20px;padding-right: 20px;border-top-width: thick;border-bottom-width: thick;border-left-width: thick;border-right-width: thick;border-left-color: darkgrey;border-top-color: darkgray;border-bottom-color: darkgray;border-right-color: darkgray;&quot;);
+
+el1.innerHTML = &apos;Account is Processing......!&apos;;
+document.body.appendChild(el);
+document.body.appendChild(el1);
+
+
+var re = sforce.apex.execute(&quot;MyWebService&quot;,&quot;showTheRecordId&quot;,{campingId:&quot;{!Camping_Item__c.Id}&quot;}); 
+if(re == &apos;-1&apos;) { 
+el1.innerHTML = &apos;Account is processed successfully.&apos;
++element; 
+
+}
+else {
+el1.innerHTML = &apos;Error in Processing the Account.&apos;+&apos;&lt;/br&gt;&apos;+re[0]+element;
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>NBVF</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>NBVF</masterLabel>
+        <openType>newWindow</openType>
+        <page>CloneCampaignItem</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+</CustomObject>
